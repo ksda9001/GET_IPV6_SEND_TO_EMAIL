@@ -5,11 +5,11 @@ import java.awt.*;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
-public class getIpUI extends JFrame {
+public class GetIpUI extends JFrame {
     JPanel root;
     JTextArea textArea;
 
-    public getIpUI(String title) throws UnknownHostException, SocketException {
+    GetIpUI(String title) throws UnknownHostException, SocketException {
         super(title);
 
         root = new JPanel();      //定义面板容器
@@ -32,10 +32,5 @@ public class getIpUI extends JFrame {
         setBounds(400, 300, 525, 450);
         setVisible(true);
         setResizable(false);
-    }
-
-    //main方法
-    public static void main(String[] args) throws SocketException, UnknownHostException {
-        new getIpUI("获取ip");
     }
 }

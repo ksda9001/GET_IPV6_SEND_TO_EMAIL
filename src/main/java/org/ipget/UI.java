@@ -1,8 +1,6 @@
 package org.ipget;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
@@ -13,7 +11,7 @@ public class UI extends JFrame {
     JButton getIpButton,setBootButton,sendButton,setTimeButton;
     JPasswordField passWordTextField;
 
-    public UI() {
+    UI() {
         root = new JPanel();      //定义面板容器
         setContentPane(root);
         setLayout(null);         //设置面板为绝对布局
@@ -25,7 +23,7 @@ public class UI extends JFrame {
         getIpButton.addActionListener(
                 e -> {
                     try {
-                        new getIpUI("获取ip");
+                        new GetIpUI("获取ip");
                     } catch (UnknownHostException | SocketException ex) {
                         throw new RuntimeException(ex);
                     }
