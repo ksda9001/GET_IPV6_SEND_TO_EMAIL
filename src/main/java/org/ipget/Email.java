@@ -4,22 +4,26 @@ import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Properties;
 
 public class Email {
-    Email(String from,String to,String body,Boolean ssl,Boolean auth,String user,String pass) throws MessagingException {
+    public Email(String from, String to, String body, String server, String port, String ssl, String auth, String user, String pass) throws MessagingException {
         EmailEntity emailEntity = new EmailEntity();
         emailEntity.setFrom(from);
         emailEntity.setTo(new String[]{to});
-        emailEntity.setSubject("JavaMail 2.0");
+        LocalDateTime dateTime = LocalDateTime.now(); // get the current date and time
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        emailEntity.setSubject(dateTime.format(formatter) + " IP地址");
         emailEntity.setFormat(EmailEntity.EmailFormat.TEXT);
         emailEntity.setBody(body);
 
         // smtp配置，可保存到properties文件，读取
         Properties props = new Properties();
-        props.put("mail.smtp.host", "smtp.qq.com");
-        props.put("mail.smtp.port", 465);
+        props.put("mail.smtp.host", server);
+        props.put("mail.smtp.port", port);
         props.put("mail.smtp.ssl", ssl);
         // 需要认证
         props.put("mail.smtp.auth", auth);

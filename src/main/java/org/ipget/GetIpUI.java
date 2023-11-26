@@ -9,7 +9,7 @@ public class GetIpUI extends JFrame {
     JPanel root;
     JTextArea textArea;
 
-    GetIpUI(String title) throws UnknownHostException, SocketException {
+    public GetIpUI(String title) throws UnknownHostException, SocketException {
         super(title);
 
         root = new JPanel();      //定义面板容器

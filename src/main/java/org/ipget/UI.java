@@ -1,17 +1,29 @@
 package org.ipget;
 
 import javax.swing.*;
+import java.awt.*;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
+class mainDialog extends JDialog {
+
+    mainDialog(UI frame) {
+        //实例化一个JDialog类对象，指定对话框的父窗体、窗体标题和类型
+        super(frame, "消息", true);
+        Container container = getContentPane();                    //创建一个容器
+        container.add(new JLabel("请将本程序移动至 “C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Startup” 创建开机启动"));           //在容器中添加标签
+        setBounds(420, 320, 650, 100);          //设置对话框窗体大小
+    }
+}
+
 public class UI extends JFrame {
     JPanel root;
-    JLabel userNameLabel,passWordLabel;
+    JLabel userNameLabel, passWordLabel;
     JTextField userTextField;
-    JButton getIpButton,setBootButton,sendButton,setTimeButton;
+    JButton getIpButton, setBootButton, sendButton, setTimeButton;
     JPasswordField passWordTextField;
 
-    UI() {
+    public UI() {
         root = new JPanel();      //定义面板容器
         setContentPane(root);
         setLayout(null);         //设置面板为绝对布局
@@ -33,16 +45,26 @@ public class UI extends JFrame {
         //添加开机启动
         setBootButton = new JButton("添加开机启动");
         setBootButton.setBounds(180, 20, 150, 23);
+        setBootButton.addActionListener(e -> {
+            new mainDialog(UI.this).setVisible(true);
+        });
         root.add(setBootButton);
 
         //发送邮件
         sendButton = new JButton("发送邮件");
         sendButton.setBounds(10, 53, 150, 23);
+        sendButton.addActionListener(
+                e -> {
+                    new SendEmailUI();
+                });
         root.add(sendButton);
 
         //设置运行时间
         setTimeButton = new JButton("设置运行时间");
-        setTimeButton.setBounds(180,53,150,23);
+        setTimeButton.setBounds(180, 53, 150, 23);
+        setTimeButton.addActionListener(e -> {
+            new SetRunTimeUI();
+        });
         root.add(setTimeButton);
 
         //设置窗口风格
