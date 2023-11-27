@@ -1,4 +1,4 @@
-All of the source code to this product is available under gpl-v3 Copyright© 2021 2023 谈翰文
+All of the source code to this product is available under gpl-v3 Copyright© 2023 谈翰文
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public
 License as published by the Free Software Foundation, either version 3 of the License, or
