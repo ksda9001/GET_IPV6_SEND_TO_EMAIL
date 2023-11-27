@@ -2,17 +2,21 @@ package ipget;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 class mainDialog extends JDialog {
 
-    mainDialog(UI frame) {
+    mainDialog(UI frame,String msg) {
         //实例化一个JDialog类对象，指定对话框的父窗体、窗体标题和类型
         super(frame, "消息", true);
         Container container = getContentPane();                    //创建一个容器
-        container.add(new JLabel("请将本程序移动至 “C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Startup” 创建开机启动"));           //在容器中添加标签
-        setBounds(420, 320, 650, 100);          //设置对话框窗体大小
+        container.add(new JLabel(msg));           //在容器中添加标签
+        setBounds(420, 320, 200, 100);          //设置对话框窗体大小
     }
 }
 
@@ -22,6 +26,7 @@ public class UI extends JFrame {
     JTextField userTextField;
     JButton getIpButton, setBootButton, sendButton, setTimeButton;
     JPasswordField passWordTextField;
+    DeleteLNK deleteLNK;
 
     public UI() {
         root = new JPanel();      //定义面板容器
@@ -46,7 +51,28 @@ public class UI extends JFrame {
         setBootButton = new JButton("添加开机启动");
         setBootButton.setBounds(180, 20, 150, 23);
         setBootButton.addActionListener(e -> {
-            new mainDialog(UI.this).setVisible(true);
+            deleteLNK = new DeleteLNK();
+            try {
+                if (!deleteLNK.checkFile()){
+                    Path target = Paths.get("GET_IPV6_SEND_TO_EMAIL.exe");
+                    Path link = Paths.get("C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\IPGET.link");
+                    try {
+                        Files.createSymbolicLink(link, target);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    new mainDialog(UI.this,"已创建开机启动！").setVisible(true);
+                }else{
+                    deleteLNK.deleteFile();
+                    new mainDialog(UI.this,"已删除开机启动！").setVisible(true);
+                }
+
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
+
+
         });
         root.add(setBootButton);
 
@@ -77,6 +103,7 @@ public class UI extends JFrame {
 
     //main方法
     public static void main(String[] args) throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        System.setProperty("java.home", ".");
         String lookAndFeel = UIManager.getSystemLookAndFeelClassName();
         UIManager.setLookAndFeel(lookAndFeel);
         new UI();
