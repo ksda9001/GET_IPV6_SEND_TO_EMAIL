@@ -17,6 +17,7 @@ class mainDialog extends JDialog {
         Container container = getContentPane();                    //创建一个容器
         container.add(new JLabel(msg));           //在容器中添加标签
         setBounds(420, 320, 200, 100);          //设置对话框窗体大小
+        setResizable(false);
     }
 }
 

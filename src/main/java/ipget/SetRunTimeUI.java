@@ -11,6 +11,7 @@ class Dialog2 extends JDialog {
         Container container = getContentPane();                    //创建一个容器
         container.add(new JLabel("操作成功！请不要关闭本程序，将本程序主窗口最小化！"));           //在容器中添加标签
         setBounds(420, 320, 500, 100);          //设置对话框窗体大小
+        setResizable(false);
     }
 }
 
