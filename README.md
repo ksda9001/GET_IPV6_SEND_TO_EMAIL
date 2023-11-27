@@ -11,3 +11,5 @@ License as published by the Free Software Foundation, either version 3 of the Li
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+# 一个使用Swing编写的，获取ip地址定时发送到指定邮箱的小工具
